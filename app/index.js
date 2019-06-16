@@ -1,9 +1,10 @@
 const express = require('express')
+const server = require(`${config.path.graphql}`)
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const validator = require('express-validator')
-
+const cors = require('cors')
 module.exports = class Application {
     constructor() {
         this.mongooseConfig()
@@ -13,6 +14,7 @@ module.exports = class Application {
     }
     // PORT
     portConfig() {
+        server.applyMiddleware({ app, path: '/graphql' })
         app.listen(config.port, () =>
             console.log(`Connected to Localhost:${config.port}`)
         )
@@ -24,6 +26,7 @@ module.exports = class Application {
     }
     // EXPRESS
     expressConfig() {
+        app.use(cors())
         app.use(
             bodyParser.urlencoded({
                 extended: false
@@ -35,6 +38,6 @@ module.exports = class Application {
     }
     // ROUTER
     routerConfig() {
-        
+        app.use(require('./routes'))
     }
 }

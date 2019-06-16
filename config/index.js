@@ -11,6 +11,7 @@ module.exports = {
             api: path.resolve('app/controllers/api')
         },
         controller: path.resolve('app/controllers'),
+        graphql: path.resolve('app/graphql'),
         middlewares: path.resolve('app/middlewares'),
         validators: path.resolve('app/validators'),
         models: path.resolve('app/models'),
