@@ -1,27 +1,10 @@
-const { ApolloServer, gql } = require('apollo-server-express')
+const { ApolloServer } = require('apollo-server-express')
 
-const schema = gql`
-  type Query {
-    me: User
-  }
-
-  type User {
-    username: String!
-  }
-`;
-
-const resolvers = {
-    Query: {
-        me: () => {
-            return {
-                username: 'Mohammad Mahdi',
-            };
-        },
-    },
-};
+const typeDefs = require('./typeDefs')
+const resolvers = require('./resolvers')
 
 const server = new ApolloServer({
-    typeDefs: schema,
+    typeDefs,
     resolvers
 })
 
