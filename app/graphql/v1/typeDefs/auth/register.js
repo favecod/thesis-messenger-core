@@ -1,8 +1,8 @@
 module.exports = `
     type Query {
-        login: User
+        register(username: String!): User
     }
-
+    
     type User {
         username: String!
     }

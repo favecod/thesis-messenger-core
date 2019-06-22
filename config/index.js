@@ -7,10 +7,7 @@ module.exports = {
     jwt,
     port: process.env.PORT,
     path: {
-        controllers: {
-            api: path.resolve('app/controllers/api')
-        },
-        controller: path.resolve('app/controllers'),
+        controllers: path.resolve('app/controllers'),
         graphql: path.resolve('app/graphql'),
         middlewares: path.resolve('app/middlewares'),
         validators: path.resolve('app/validators'),

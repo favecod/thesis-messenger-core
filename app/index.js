@@ -5,16 +5,16 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const validator = require('express-validator')
 const cors = require('cors')
+
 module.exports = class Application {
     constructor() {
         this.mongooseConfig()
         this.expressConfig()
-        this.routerConfig()
-        this.portConfig()
+        this.serverConfig()
     }
-    // PORT
-    portConfig() {
-        server.applyMiddleware({ app, path: '/graphql' })
+    // Server
+    serverConfig() {
+        server(app)
         app.listen(config.port, () =>
             console.log(`Connected to Localhost:${config.port}`)
         )
@@ -35,9 +35,5 @@ module.exports = class Application {
         app.use(bodyParser.json())
         app.use(validator())
         app.use('/public', express.static('public'))
-    }
-    // ROUTER
-    routerConfig() {
-        app.use(require('./routes'))
     }
 }

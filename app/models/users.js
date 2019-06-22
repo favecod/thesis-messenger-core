@@ -12,16 +12,16 @@ const userSchema = Schema(
         },
         fullname: {
             type: String,
-            required: true
+            required: false
         },
         password: {
             type: String,
-            required: true
+            required: false
         },
         email: {
             type: String,
-            required: true,
-            unique: true,
+            required: false,
+            unique: false,
             lowercase: true
         },
         birthday: {
@@ -87,4 +87,4 @@ userSchema.methods.comparePasswords = function (password) {
     return bcrypt.compareSync(password, this.password)
 }
 
-module.exports = mongoose.model('users', userSchema)
+module.exports = mongoose.model('Users', userSchema)

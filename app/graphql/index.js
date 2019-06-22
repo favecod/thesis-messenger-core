@@ -1,11 +1,7 @@
-const { ApolloServer } = require('apollo-server-express')
+const apiv1 = require('./v1')
 
-const typeDefs = require('./typeDefs')
-const resolvers = require('./resolvers')
+const routes = (app) => {
+    apiv1.applyMiddleware({ app, path: '/api/v1/graphql' })
+}
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers
-})
-
-module.exports = server
+module.exports = routes
