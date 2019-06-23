@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcrypt')
-
 const userSchema = Schema(
     {
         username: {
@@ -12,16 +10,16 @@ const userSchema = Schema(
         },
         fullname: {
             type: String,
-            required: false
+            required: true
         },
         password: {
             type: String,
-            required: false
+            required: true
         },
         email: {
             type: String,
             required: false,
-            unique: false,
+            unique: true,
             lowercase: true
         },
         birthday: {
@@ -76,15 +74,5 @@ const userSchema = Schema(
         }
     }
 )
-
-userSchema.methods.hashPassword = function (password) {
-    let salt = bcrypt.genSaltSync(15)
-    let hash = bcrypt.hashSync(password, salt)
-    return hash
-}
-
-userSchema.methods.comparePasswords = function (password) {
-    return bcrypt.compareSync(password, this.password)
-}
 
 module.exports = mongoose.model('Users', userSchema)
