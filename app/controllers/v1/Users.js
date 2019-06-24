@@ -1,5 +1,4 @@
 const Controller = require(`${config.path.controllers}`)
-const jwt = require('jsonwebtoken')
 
 class Users extends Controller {
     async getUser(args, context) {
@@ -9,13 +8,8 @@ class Users extends Controller {
                 
             const { Users } = this.model
             const user = await Users.findOne({ username: args.username })
-            if (user) {
-                return {
-                    id: user.id,
-                    fullname: user.fullname,
-                    username: user.username,
-                }
-            }
+            if (user) return this.filter.users.show(user)
+
         } catch (err) {
             return new Error(err)
         }

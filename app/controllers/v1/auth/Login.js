@@ -15,17 +15,9 @@ class Login extends Controller {
                     id: user.id,
                     username: args.username
                 }, config.jwt.secretKey, config.jwt.options)
-                
-                const result = {
-                    token,
-                    user: {
-                        id: user.id,
-                        username: user.username,
-                        fullname: user.fullname
-                    }
-                } 
 
-                return result
+                return this.filter.auth.login(token, user)
+                
         } catch (err) {
             return new Error(err)
         }

@@ -9,13 +9,7 @@ class Register extends Controller {
             args.password = bcrypt.hashSync(args.password, salt)
             const user = await Users.create(args)
 
-            if (user) {
-                return {
-                    id: user._id,
-                    fullname: user.fullname,
-                    username: user.username
-                }
-            } 
+            if (user) return this.filter.auth.register(user)
 
         } catch (err) {
             return new Error(err)
