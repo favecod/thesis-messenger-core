@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt')
 class Register extends Controller {
     async handle(args) {
         try {
-            const { Users } = this.model
+            const { USERS } = this.model
             const salt = bcrypt.genSaltSync(15)
             args.password = bcrypt.hashSync(args.password, salt)
-            const user = await Users.create(args)
+            const user = await USERS.create(args)
 
             if (user) return this.filter.auth.register(user)
 

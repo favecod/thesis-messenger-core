@@ -9,6 +9,7 @@
         "start": "nodemon server.js"
     },
     "dependencies": {
+        "apollo-errors": "^1.9.0",
         "apollo-server": "^2.6.3",
         "apollo-server-express": "^2.6.3",
         "app-module-path": "^2.2.0",

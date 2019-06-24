@@ -1,14 +1,9 @@
 const show = user => {
-    if(user) {
-        return {
-            id: user.id,
-            fullname: user.fullname,
-            username: user.username,
-        }
-    } else {
-        return null
+    return {
+        id: user.id,
+        fullname: user.fullname,
+        username: user.username,
     }
-    
 }
 
 module.exports = {
