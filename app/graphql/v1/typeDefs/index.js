@@ -1,8 +1,10 @@
 const { mergeTypes } = require('merge-graphql-schemas')
 const auth = require('./auth')
+const users = require('./users')
 
 const types = [
-    auth
+    auth,
+    users
 ]
 
 module.exports = mergeTypes(types, { all: true })

@@ -1,10 +1,13 @@
-const { mergeResolvers } = require('merge-graphql-schemas')
-const register = require('./register')
-const login = require('./login')
+const VERSION = 'v1'
+const CONTROLLERS = config.path.controllers
+const Login = require(`${CONTROLLERS}/${VERSION}/auth/Login`)
+const Register = require(`${CONTROLLERS}/${VERSION}/auth/Register`)
 
-const resolvers = [
-    register,
-    login,
-]
+const resolvers = {
+    Query: {
+        login: (_, args) => Login.handle(args),
+        register: (_, args) => Register.handle(args)
+    }
+}
 
-module.exports = mergeResolvers(resolvers)
+module.exports = resolvers

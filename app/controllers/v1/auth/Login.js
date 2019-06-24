@@ -1,12 +1,11 @@
 const Controller = require(`${config.path.controllers}`)
-const Models = require(`${config.path.models}`)
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 class Login extends Controller {
     async handle(args) {
         try {
-            const { Users } = Models
+            const { Users } = this.model
             const user = await Users.findOne({ username: args.username }) 
                 if (!user || !bcrypt.compareSync(args.password, user.password)) {
                     return new Error('Username or Password is wrong')

@@ -1,10 +1,21 @@
-const { mergeTypes } = require('merge-graphql-schemas')
-const register = require('./register')
-const login = require('./login')
+const { gql } = require('apollo-server')
 
-const types = [
-    register,
-    login,
-]
+const types = gql`
+    type Query {
+        register(username: String!, password: String!, fullname: String!): User!
+        login(username: String!, password: String!): AuthPayload!
+    }
 
-module.exports = mergeTypes(types, { all: true })
+    type AuthPayload {
+        user: User
+        token: String!
+    }
+    
+    type User {
+        id: ID
+        username: String!
+        fullname: String
+    }
+`
+
+module.exports = types
