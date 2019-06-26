@@ -6,6 +6,7 @@ const contacts = require(`${CONTROLLERS}/${VERSION}/Contacts`)
 const resolvers = {
     Query: {
         addToContacts: (_, args, context) => contacts.add(args, context),
+        removeFromContacts: (_, args, context) => contacts.remove(args, context),
     }
 }
 
