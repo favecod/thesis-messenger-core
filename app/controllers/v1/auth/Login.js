@@ -7,16 +7,16 @@ class Login extends Controller {
         try {
             const { USERS } = this.model
             const user = await USERS.findOne({ username: args.username }) 
-                if (!user || !bcrypt.compareSync(args.password, user.password)) {
-                    return new Error('Username or Password is wrong')
-                }
+            if (!user || !bcrypt.compareSync(args.password, user.password)) {
+                return new Error('Username or Password is wrong')
+            }
 
-                const token = jwt.sign({
-                    id: user.id,
-                    username: args.username
-                }, config.jwt.secretKey, config.jwt.options)
+            const token = jwt.sign({
+                id: user.id,
+                username: args.username
+            }, config.jwt.secretKey, config.jwt.options)
 
-                return this.filter.auth.login(token, user)
+            return this.filter.auth.login(token, user)
                 
         } catch (err) {
             return new Error(err)

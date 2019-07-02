@@ -9,6 +9,7 @@ const resolvers = {
     },
     Mutation: {
         editUser: (_, args, context) => users.edit(args, context),
+        changePasswordUser: (_, args, context) => users.changePassword(args, context),
     }
 }
 

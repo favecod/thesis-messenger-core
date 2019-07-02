@@ -7,6 +7,7 @@ const types = gql`
 
     type Mutation {
         editUser(user: UserInput): User
+        changePasswordUser(oldPassword: String!, password: String!, confirmPassword: String!): User
     }
 
     input UserInput {
