@@ -72,11 +72,11 @@ class Contact extends Controller {
             }
 
             return this.filter.contacts.removeFriend(friendCounter)
-
         } catch (err) {
             return new Error(err)
         }
     }
+    
 }
 
 module.exports = new Contact

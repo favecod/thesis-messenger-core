@@ -4,7 +4,7 @@ const CONTROLLERS = config.path.controllers
 const contacts = require(`${CONTROLLERS}/${VERSION}/Contacts`)
 
 const resolvers = {
-    Query: {
+    Mutation: {
         addToContacts: (_, args, context) => contacts.add(args, context),
         removeFromContacts: (_, args, context) => contacts.remove(args, context),
     }

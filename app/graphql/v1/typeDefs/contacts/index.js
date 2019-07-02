@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server')
 
 const types = gql`
-    type Query {
+    type Mutation {
         addToContacts(id: ID!): Friend
         removeFromContacts(id: ID!): Friend
     }

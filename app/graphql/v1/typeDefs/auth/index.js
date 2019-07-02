@@ -2,8 +2,11 @@ const { gql } = require('apollo-server')
 
 const types = gql`
     type Query {
-        register(username: String!, password: String!, fullname: String!): User!
         login(username: String!, password: String!): AuthPayload!
+    }
+
+    type Mutation {
+        register(username: String!, password: String!, fullname: String!): User!
     }
 
     type AuthPayload {

@@ -12,6 +12,10 @@ const types = Schema(
             ref: 'users',
             required: true
         },
+        accept: {
+            type: Boolean,
+            default: true
+        },
         active: {
             type: Boolean,
             default: false

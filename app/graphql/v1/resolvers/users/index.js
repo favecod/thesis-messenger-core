@@ -6,6 +6,9 @@ const users = require(`${CONTROLLERS}/${VERSION}/Users`)
 const resolvers = {
     Query: {
         getUser: (_, args, context) => users.show(args, context),
+    },
+    Mutation: {
+        editUser: (_, args, context) => users.edit(args, context),
     }
 }
 

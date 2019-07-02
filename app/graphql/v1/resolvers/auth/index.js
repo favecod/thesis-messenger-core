@@ -6,6 +6,8 @@ const Register = require(`${CONTROLLERS}/${VERSION}/auth/Register`)
 const resolvers = {
     Query: {
         login: (_, args) => Login.handle(args),
+    },
+    Mutation: {
         register: (_, args) => Register.handle(args)
     }
 }
