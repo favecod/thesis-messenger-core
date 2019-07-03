@@ -8,7 +8,7 @@ class Login extends Controller {
             const { USERS } = this.model
             const user = await USERS.findOne({ username: args.username }) 
             if (!user || !bcrypt.compareSync(args.password, user.password)) {
-                return new Error('Username or Password is wrong')
+                return this.errorHandler('Username or Password is wrong')
             }
 
             const token = jwt.sign({
@@ -19,7 +19,7 @@ class Login extends Controller {
             return this.filter.auth.login(token, user)
                 
         } catch (err) {
-            return new Error(err)
+            return this.errorHandler(err)
         }
     }
 }

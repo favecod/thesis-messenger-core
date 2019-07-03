@@ -9,4 +9,8 @@ module.exports = class Controller {
         this.model = Models
         this.filter = Filters
     }
+
+    errorHandler(msg) {
+        return new Error(msg)
+    } 
 }

@@ -12,7 +12,7 @@ class Register extends Controller {
             if (user) return this.filter.auth.register(user)
 
         } catch (err) {
-            return new Error(err)
+            return this.errorHandler(err)
         }
     }
 }
