@@ -1,6 +1,9 @@
 const { gql } = require('apollo-server')
 
 const types = gql`
+    type Subscription {
+        getOnlineUser: User
+    }
     type Query {
         getUser(username: String!): User
     }

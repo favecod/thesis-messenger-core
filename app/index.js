@@ -1,9 +1,8 @@
 const express = require('express')
-const server = require(`${config.path.graphql}`)
+const server = require(`${config.path.graphql}/v1`)
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const validator = require('express-validator')
 const cors = require('cors')
 
 module.exports = class Application {
@@ -12,12 +11,14 @@ module.exports = class Application {
         this.expressConfig()
         this.serverConfig()
     }
-    // Server
+    // SERVER
     serverConfig() {
-        server(app)
-        app.listen(config.port, () =>
-            console.log(`Connected to Localhost:${config.port}`)
-        )
+        server.listen().then(({ url }) => {
+            console.log(`🚀 Server ready at ${url}`);
+        });
+        // app.listen(config.port, () =>
+        //     console.log(`Connected to Localhost:${config.port}`)
+        // )
     }
     // DATABASE
     mongooseConfig() {
@@ -33,7 +34,6 @@ module.exports = class Application {
             })
         )
         app.use(bodyParser.json())
-        app.use(validator())
         app.use('/public', express.static('public'))
     }
 }

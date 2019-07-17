@@ -3,7 +3,7 @@ const Controller = require(`${config.path.controllers}`)
 class Contact extends Controller {
     async add(args, context) {
         try {
-            if (!context.token)
+            if (!this.verifyToken(context.req.headers.token))
                 return this.errorHandler('Athentication Faild')
             
             const { USERS, USERS_CONTACTS } = this.model
@@ -42,7 +42,7 @@ class Contact extends Controller {
 
     async remove(args, context) {
         try {
-            if (!context.token)
+            if (!this.verifyToken(context.req.headers.token))
                 return this.errorHandler('Athentication Faild')
 
             const { USERS, USERS_CONTACTS } = this.model

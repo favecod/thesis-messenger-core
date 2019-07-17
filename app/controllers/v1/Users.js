@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 class Users extends Controller {
     async show(args, context) {
         try {
-            if(!context.token)
+            if (!this.verifyToken(context.req.headers.token))
                 return this.errorHandler('Athentication Faild')
                 
             const { USERS } = this.model
@@ -19,7 +19,7 @@ class Users extends Controller {
 
     async edit(args, context) {
         try {
-            if (!context.token)
+            if (!this.verifyToken(context.req.headers.token))
                 return this.errorHandler('Athentication Faild')
 
             const { USERS } = this.model
@@ -39,7 +39,7 @@ class Users extends Controller {
 
     async changePassword(args, context) {
         try {
-            if (!context.token)
+            if (!this.verifyToken(context.req.headers.token))
                 return this.errorHandler('Athentication Faild')
 
             const { USERS } = this.model
