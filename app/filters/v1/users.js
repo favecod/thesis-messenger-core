@@ -6,6 +6,15 @@ const show = user => {
     }
 }
 
+const showAll = users => {
+    let result = []
+    users.map(item => {
+        result.push(show(item))
+    })
+    return result
+}
+
 module.exports = {
     show,
+    showAll,
 }

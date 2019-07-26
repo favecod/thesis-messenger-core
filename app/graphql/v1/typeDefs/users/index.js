@@ -4,8 +4,10 @@ const types = gql`
     type Subscription {
         getOnlineUser: User
     }
+    
     type Query {
         getUser(username: String!): User
+        getUsers: [User]
     }
 
     type Mutation {

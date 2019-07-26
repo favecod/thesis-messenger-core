@@ -17,6 +17,21 @@ class Users extends Controller {
         } 
     }
 
+    async showAll(args, context) {
+        try {
+            if (!this.verifyToken(context.req.headers.token))
+                return this.errorHandler('Athentication Faild')
+
+            const { USERS } = this.model
+            const users = await USERS.find({})
+            console.log(this.filter.users.showAll(users))
+            if (users) return this.filter.users.showAll(users)
+
+        } catch (err) {
+            return this.errorHandler(err)
+        } 
+    }
+
     async edit(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))

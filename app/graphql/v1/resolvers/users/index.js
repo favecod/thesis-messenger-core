@@ -12,6 +12,9 @@ const resolvers = {
         }
     },
     Query: {
+        getUsers: async (_, args, context) => {
+            return await users.showAll(args, context)
+        },
         getUser: async (_, args, context) => {
             const user = await users.show(args, context)
             context.pubsub.publish(GET_ONLINE_USER,{
