@@ -14,7 +14,7 @@ const types = Schema(
         },
         active: {
             type: Boolean,
-            default: false
+            default: true
         },
         deleted: {
             type: Boolean,

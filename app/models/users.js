@@ -56,7 +56,7 @@ const types = Schema(
         },
         active: {
             type: Boolean,
-            default: false
+            default: true
         },
         image: {
             type: String,

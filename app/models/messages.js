@@ -12,9 +12,13 @@ const types = Schema(
             ref: 'groups',
             required: true
         },
-        accept: {
-            type: Boolean,
-            default: true
+        text: {
+            type: String,
+            required: true
+        },
+        attached: {
+            type: String,
+            default: null,
         },
         active: {
             type: Boolean,
@@ -23,7 +27,7 @@ const types = Schema(
         deleted: {
             type: Boolean,
             default: false
-        }       
+        }
     },
     {
         timestamps: true,
@@ -39,10 +43,4 @@ types.virtual('user', {
     foreignField: '_id'
 })
 
-types.virtual('group', {
-    ref: 'groups',
-    localField: 'groupId',
-    foreignField: '_id'
-})
-
-module.exports = mongoose.model('users_groups', types)
+module.exports = mongoose.model('messages', types)
