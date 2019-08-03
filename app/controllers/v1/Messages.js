@@ -5,10 +5,10 @@ class Message extends Controller {
     async add(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))
-                return this.errorHandler('Athentication Faild')
+                return this.errorHandler('احراز هویت تایید نشد')
 
             const { MESSAGES, USERS } = this.model
-            let body = Body.extract(args.message)
+            let body = Body.extract(args)
             body.userId = this.verifyToken(context.req.headers.token).id
             let message = await MESSAGES.create(body)
             const user = await USERS.findById(body.userId)
@@ -23,7 +23,7 @@ class Message extends Controller {
     async showAll(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))
-                return this.errorHandler('Athentication Faild')
+                return this.errorHandler('احراز هویت تایید نشد')
 
             const { MESSAGES } = this.model
             const messages = await MESSAGES.find(args).populate('user')

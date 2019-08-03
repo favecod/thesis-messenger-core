@@ -6,7 +6,7 @@ class Users extends Controller {
     async show(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))
-                return this.errorHandler('Athentication Faild')
+                return this.errorHandler('احراز هویت تایید نشد')
                 
             const { USERS } = this.model
             const user = await USERS.findOne({ username: args.username })
@@ -20,31 +20,44 @@ class Users extends Controller {
     async showAll(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))
-                return this.errorHandler('Athentication Faild')
+                return this.errorHandler('احراز هویت تایید نشد')
 
             const { USERS } = this.model
             const users = await USERS.find({})
-            console.log(this.filter.users.showAll(users))
             if (users) return this.filter.users.showAll(users)
 
         } catch (err) {
             return this.errorHandler(err)
         } 
     }
+    
+    async delete(args, context) {
+        try {
+            if (!this.verifyToken(context.req.headers.token))
+                return this.errorHandler('احراز هویت تایید نشد')
+
+            const { USERS } = this.model
+            const user = await USERS.findByIdAndDelete(args.id)
+            if (user) return this.filter.users.show(user)
+
+        } catch (err) {
+            return this.errorHandler(err)
+        }
+    }
 
     async edit(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))
-                return this.errorHandler('Athentication Faild')
+                return this.errorHandler('احراز هویت تایید نشد')
 
             const { USERS } = this.model
             let body = Body.extract(args.user)
 
             const user = await USERS.findByIdAndUpdate(context.token.id, { $set: body })
-            if (!user) return this.errorHandler('Try Again')
+            if (!user) return this.errorHandler('دوباره تلاش کنید')
             
             const modifiedUser = await USERS.findById(context.token.id)
-            if (!modifiedUser) return this.errorHandler('User not found')
+            if (!modifiedUser) return this.errorHandler('کاربر یافت نشد')
             return this.filter.users.show(modifiedUser)
 
         } catch (err) {
@@ -55,18 +68,18 @@ class Users extends Controller {
     async changePassword(args, context) {
         try {
             if (!this.verifyToken(context.req.headers.token))
-                return this.errorHandler('Athentication Faild')
+                return this.errorHandler('احراز هویت تایید نشد')
 
             const { USERS } = this.model
             
-            if (args.password !== args.confirmPassword) return this.errorHandler('Passwords is not the same')
+            if (args.password !== args.confirmPassword) return this.errorHandler('رمز عبور و تایید آن درست نیست')
 
             let user = await USERS.findById(context.token.id)
             if (!user || !bcrypt.compareSync(args.oldPassword, user.password)) {
-                return this.errorHandler('Old password is wrong')
+                return this.errorHandler('پسورد قبلی اشتباه است')
             } 
 
-            if (args.oldPassword === args.password) return this.errorHandler('New password should be different with old password')
+            if (args.oldPassword === args.password) return this.errorHandler('پسورد جدید باید با پسورد قبلی تفاوت داشته باشد')
 
             const salt = bcrypt.genSaltSync(15)
             args.password = bcrypt.hashSync(args.password, salt)
@@ -76,10 +89,10 @@ class Users extends Controller {
             }
 
             let newUser = await USERS.findByIdAndUpdate(context.token.id, { $set: body })
-            if (!newUser) return this.errorHandler('Try Again')
+            if (!newUser) return this.errorHandler('دوباره تلاش کنید')
 
             const modifiedUser = await USERS.findById(context.token.id)
-            if (!modifiedUser) return this.errorHandler('User not found')
+            if (!modifiedUser) return this.errorHandler('کاربر یافت نشد')
             return this.filter.users.show(modifiedUser)
             
 

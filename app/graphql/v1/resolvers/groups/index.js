@@ -5,6 +5,9 @@ const groups = require(`${CONTROLLERS}/${VERSION}/Groups`)
 
 const resolvers = {
     Query: {
+        getGroupsForUser: async (_, args, context) => {
+            return await groups.showGroupsForUser(args, context)
+        },
         getGroup: async (_, args, context) => {
             return await groups.showUsers(args, context)
         },

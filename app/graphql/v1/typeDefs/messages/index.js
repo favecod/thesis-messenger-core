@@ -9,13 +9,7 @@ const types = gql`
     }
 
     type Mutation {
-        addMessage(message: MessageInput!): Message
-    }
-
-    input MessageInput {
-        text: String!
-        groupId: ID!
-        attached: String
+        addMessage(text: String!, groupId: ID!, attached: String): Message
     }
 
     type Message {
@@ -25,6 +19,7 @@ const types = gql`
         user: User
         groupId: ID
         attached: String
+        createdAt: String
     }
 
     type User {

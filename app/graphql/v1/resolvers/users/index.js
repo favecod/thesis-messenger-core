@@ -16,6 +16,9 @@ const resolvers = {
         },
     },
     Mutation: {
+        deleteUser: async (_, args, context) => {
+            return await users.delete(args, context)
+        },
         editUser: (_, args, context) => users.edit(args, context),
         changePasswordUser: (_, args, context) => users.changePassword(args, context),
     }

@@ -7,6 +7,7 @@ const types = gql`
     }
 
     type Mutation {
+        deleteUser(id: ID!): User
         editUser(user: UserInput): User
         changePasswordUser(oldPassword: String!, password: String!, confirmPassword: String!): User
     }
@@ -30,6 +31,7 @@ const types = gql`
         birthday: String
         image: String
         cover: String
+        createdAt: String
     }
 `
 

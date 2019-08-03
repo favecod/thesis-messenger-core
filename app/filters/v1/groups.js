@@ -5,6 +5,7 @@ const show = group => {
         id: group.id,
         name: group.name,
         groupname: group.groupname,
+        createdAt: group.createdAt,
     }
 }
 
@@ -33,9 +34,17 @@ const showUsers = items => {
     return result
 }
 
+const showGroupsForUser = ({joined, notJoined}) => {
+    return {
+        joined,notJoined
+    }
+}
+
+
 module.exports = {
     show,
     showAll,
     usersGroups,
     showUsers,
+    showGroupsForUser
 }

@@ -3,6 +3,7 @@ const show = user => {
         id: user.id,
         fullname: user.fullname,
         username: user.username,
+        createdAt: user.createdAt,
     }
 }
 

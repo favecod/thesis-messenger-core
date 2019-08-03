@@ -7,6 +7,7 @@ const show = item => {
         user: userFilter.show(item.user[0]),
         groupId: item.groupId,
         attached: item.attached,
+        createdAt: item.createdAt
     }
 }
 
